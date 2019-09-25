@@ -12,7 +12,37 @@ Copy all sas datasets in work library to tabs in one excel workbook
     SAS Forum                                                                                                                     
     https://tinyurl.com/y5nlxf5x                                                                                                  
     https://communities.sas.com/t5/SAS-Programming/How-to-export-all-dataset-present-in-work-library-to-an-excel/m-p/591482       
-                                                                                                                                  
+        
+    *                _       _                                               
+     _   _ _ __   __| | __ _| |_ ___                                         
+    | | | | '_ \ / _` |/ _` | __/ _ \                                        
+    | |_| | |_) | (_| | (_| | ||  __/                                        
+     \__,_| .__/ \__,_|\__,_|\__\___|                                        
+          |_|                                                                
+    ;                                                                        
+                                                                             
+    Much simpler solution by data_null                                       
+                                                                             
+    https://communities.sas.com/t5/user/viewprofilepage/user-id/15410        
+                                                                             
+    proc datasets lib=work kill;                                             
+    run;quit;                                                                
+                                                                             
+                                                                             
+    %utlfkil(d:/xls/book.xlsx);                                              
+                                                                             
+    data one two three;                                                      
+       set sashelp.class;                                                    
+    run;                                                                     
+                                                                             
+    libname xel  'd:/xls/book.xlsx';                                         
+                                                                             
+    proc copy in=work out=xel mt=data;                                       
+    run;quit;                                                                
+                                                                             
+    libname xel clear;                                                       
+                                                                             
+                                                                                                                              
     *_                   _                                                                                                        
     (_)_ __  _ __  _   _| |_                                                                                                      
     | | '_ \| '_ \| | | | __|                                                                                                     
